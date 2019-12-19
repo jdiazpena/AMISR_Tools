@@ -1,5 +1,7 @@
 function AMISRplotBeams3D(data,timeStr)
 
+fontsize=12;
+
 %timeStr='01/24/2012 12:07:00';
 desiretime=datenum(timeStr);
 index=find(abs((data.timenum-desiretime))==min(abs(data.timenum-desiretime)));
@@ -46,11 +48,16 @@ Ne=reshape(Ne,[altsize(1)*altsize(2),1]);
 
 figure
 scatter3(0,0,data.alt0/1000,10,'filled','k')
+ax=gca;
 hold on
 scatter3(yr,xr,zr,15,Ne,'filled')
-xlabel('Km North')
+ylabel('East of RISR-N [km]')
+xlabel('North of RISR-N [km]')
+zlabel('Altitude [km]')
+
 hc=colorbar;
 colormap('jet');
 title(hc,cLabel);
 caxis([10 11.5]);
-set(gca,'Ydir','reverse')
+set(ax,'Ydir','reverse')
+set(ax,'fontsize',fontsize)
